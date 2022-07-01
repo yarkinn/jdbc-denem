@@ -2,7 +2,18 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class App {
+    public static boolean hasDigits(String s){
+
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isDigit(s.charAt(i))){
+                return true;
+            }
+
+        }
+        return false;
+    }
     public static void main(String[] args) throws Exception {
+        System.out.println("Welcome to employee management system");
         int cont = 1;
         EmployeeOperations operations = new EmployeeOperations();
         while( cont != 0){
@@ -13,7 +24,6 @@ public class App {
                     String openTable = "create table employeeTable (id int, name varchar(150),email varchar(150))";
                     stmt.executeUpdate(openTable);
                 }
-                System.out.println("Welcome to employee management system");
                 System.out.print("Enter 0 to stop, 1 to add new employee, 2 to remove employee, 3 to list them: ");
                 Scanner scan = new Scanner(System.in);
                 cont = scan.nextInt();
@@ -27,6 +37,11 @@ public class App {
                     else{
                         System.out.print("Name of the employee: ");
                         String name = scan.next();
+                        if(hasDigits(name)){
+                            System.out.print("Employee name can't include numbers. New name: ");
+                            name = scan.next();
+
+                        }
                         System.out.print("Email of the employee: ");
                         String email = scan.next();
                         stmt.executeUpdate(operations.addEmployee(id, name, email));
@@ -67,7 +82,7 @@ public class App {
                 
                     
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("wrong input !!!");;
             }
 
         }
