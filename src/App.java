@@ -7,7 +7,7 @@ public class App {
         EmployeeOperations operations = new EmployeeOperations();
         while( cont != 0){
             try {
-                Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/newhospital" , "student", "yarkin-1303");
+                Connection myConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/newhospital" , "root", "admin");
                 Statement stmt = myConnection.createStatement();
                 if( !tableExistsSQL(myConnection, "employeeTable")){
                     String openTable = "create table employeeTable (id int, name varchar(150),email varchar(150))";
